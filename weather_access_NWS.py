@@ -8,9 +8,9 @@ import pandas as pd
 # Specifying location coordinates in decimal degrees in the interface
 
 lat = float(input("Latitude: "))
-lat_dir = input("N or S? ")
+lat_dir = input("N or S? ").upper()
 lon = float(input("Longitude: "))
-lon_dir = input("E or W? ")
+lon_dir = input("E or W? ").upper()
 
 if lat_dir == "N":
     lat = lat
@@ -53,7 +53,7 @@ if response.status_code == 200:
 
     if forecast_response.status_code ==200:
         forecast_data = forecast_response.json()
-        periods = forecast_data["properties"]["forecast"]
+        periods = forecast_data["properties"]["periods"]
 
         selected_parameters = [
         ("Start Time", "startTime"),
@@ -64,11 +64,13 @@ if response.status_code == 200:
         ("Cloud Cover", "clouds")
         ]
 
-        df = pd.DataFrame({param: [period.get(param, None) for period in periods] for param in selected_parameters})
+        df = pd.DataFrame({param[0]: [period.get(param[1], None) for period in periods] for param in selected_parameters})
+
+        df.index = df.index + 1
 
         print("Weather Forecast Data (Selected Parameters):")
 
-        print(df.to_string(index=False))
+        print(df.to_string(index= True))
 
     else:
 
