@@ -2,8 +2,8 @@
 # Import the required libraries
 import requests
 import geopy
-import tkinter as tk
 import pandas as pd
+import pydap
 
 # Specifying location coordinates in decimal degrees in the interface
 
