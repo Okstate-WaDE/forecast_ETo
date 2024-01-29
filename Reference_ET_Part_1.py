@@ -29,6 +29,7 @@ e_tmin = 0.6108*math.exp(17.27*t_min/(t_min+237.3))
 es = np.mean([e_tmax, e_tmin])
 
 # Calculating Actual Vapour Pressure
+# The expression is used to check if there is some value in the humidity data. 
 
 regex = '^(0|[1-9]\d*)(\.\d+)?$'
 
